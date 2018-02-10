@@ -18,9 +18,10 @@ window.onload = function () {
                     //sessionStorage.setItem('password', password);
 
                     if (pseudo === sessionStorage.getItem("pseudo") && password === sessionStorage.getItem("password")){
-                        console.log(document.querySelector('body').innerHTML);
+                        document.querySelector("#userPseudo").innerHTML = pseudo;
+                        document.querySelector('#menu').style.display = 'block';
                         var login = document.querySelector('#login');
-                        login.replaceWith(document.querySelector('#menu').innerHTML);
+                        login.style.display = 'none';
                     }
                     return false
                 }
