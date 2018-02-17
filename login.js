@@ -1,39 +1,65 @@
 window.onload = function () {
-    document.querySelector('#menu').style.display = 'none';
+    //sessionStorage.setItem('pseudo', 'pako');
+    //sessionStorage.setItem('password', '123');
 
-        var request = new XMLHttpRequest();
-        request.open('GET', 'templates/login.html', true);
+    var menu = document.querySelector('#menu');
+    var login = document.querySelector('#login');
+    var profile = document.querySelector('#profile');
+    menu.style.display = 'none';
 
-        request.onload = function () {
-            if (this.status >= 200 && this.status < 400) {
+    var request = new XMLHttpRequest();
+    request.open('GET', 'templates/login.html', true);
 
-                var resp = this.response;
-                document.querySelector('#login').innerHTML = resp;
+    request.onload = function () {
+        if (this.status >= 200 && this.status < 400) {
 
-                document.forms['loginForm'].onsubmit = function () {
-                    var pseudo = document.querySelector('#pseudo').value;
-                    var password = document.querySelector('#password').value;
-                    //sessionStorage.clear();
-                    //sessionStorage.setItem('pseudo', pseudo);
-                    //sessionStorage.setItem('password', password);
+            var resp = this.response;
+            login.innerHTML = resp;
 
-                    if (pseudo === sessionStorage.getItem("pseudo") && password === sessionStorage.getItem("password")){
-                        document.querySelector("#userPseudo").innerHTML = pseudo;
-                        document.querySelector('#menu').style.display = 'block';
-                        var login = document.querySelector('#login');
-                        login.style.display = 'none';
-                    }
-                    return false
+            document.forms['loginForm'].onsubmit = function () {
+                var pseudo = document.querySelector('#pseudo').value;
+                var password = document.querySelector('#password').value;
+
+                if (pseudo === sessionStorage.getItem("pseudo") && password === sessionStorage.getItem("password")) {
+                    document.querySelector("#userPseudo").innerHTML = pseudo;
+                    menu.style.display = 'block';
+                    login.style.display = 'none';
                 }
-            } else {
+                return false
+            }
+        }
+    };
 
+    request.send();
+
+    var home = document.querySelector('#home');
+    home.onclick = function () {
+        login.style.display = 'none';
+    };
+
+    var requestProfile = new XMLHttpRequest();
+    requestProfile.open('GET', 'templates/profile.html', true);
+
+    document.querySelector("#userPseudo").onclick = function () {
+
+        requestProfile.onload = function () {
+            if (this.status >= 200 && this.status < 400) {
+                var respProfile = this.response;
+                profile.innerHTML = respProfile;
+
+                var userPseudoProfile = document.querySelector('#userPseudoProfile');
+                userPseudoProfile.value = sessionStorage.getItem("pseudo");
+                menu.style.display = 'none';
+
+                var formProfile = document.querySelector('#formProfile');
+                formProfile.onsubmit = function () {
+                    sessionStorage.setItem('pseudo', userPseudoProfile.value);
+                    menu.style.display = 'block';
+                    profile.style.display = 'none';
+                }
             }
         };
+        requestProfile.send();
 
-        request.onerror = function () {
-            // There was a connection error of some sort
-        };
-
-        request.send();
-
+    };
 };
