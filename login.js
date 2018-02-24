@@ -41,6 +41,7 @@ window.onload = function () {
     var home = document.querySelector('#home');
     home.onclick = function () {
         login.style.display = 'none';
+        profile.style.display = 'none';
     };
 
     document.querySelector("#userPseudo").onclick = function () {
