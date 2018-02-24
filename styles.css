@@ -1,0 +1,28 @@
+body{
+    background: #c3c3c3;
+}
+#menu, #divHome{
+    display: none;
+}
+#menu{
+    font-size: 3vw;
+    background: black;
+    color: white;
+    width: 100vw;
+    margin: -8px;
+    height: 12vh;
+    justify-content: space-around;
+    align-items: center;
+}
+#home, #buttonPseudo, #logOut{
+    cursor: pointer;
+}
+#divHome{
+    justify-content: center;
+    align-items: center;
+    width: 98vw;
+    height: 81vh;
+    font-size: 4vw;
+    margin-left: -8px;
+    margin-top: 8px;
+}
