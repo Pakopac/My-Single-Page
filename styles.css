@@ -26,3 +26,37 @@ body{
     margin-left: -8px;
     margin-top: 8px;
 }
+#login{
+    display: flex;
+    flex-direction: column;
+    border: 0.3vw solid black;
+    width: 34%;
+    margin-top: 25vh;
+    margin-left: 27vw;
+    padding: 5vh 4vw;
+    height: 50%;
+}
+.textLogin{
+    font-size: 4vw;
+    text-align: center;
+    margin-bottom: 5vh;
+}
+.loginForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#password{
+    margin-left: 0.5vw;
+}
+#pseudo, #password{
+    font-size: 2vw;
+    width: 12vw;
+    height: 4vh;
+}
+.btnLogin{
+    margin-top: 6vh;
+    font-size: 2vw;
+    cursor: pointer;
+    padding: 0.5vw;
+}

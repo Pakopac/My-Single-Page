@@ -78,7 +78,7 @@ window.onload = function () {
         menu.style.display = 'none';
         profile.style.display = 'none';
         divHome.style.display = 'none';
-        login.style.display = 'block';
+        login.style.display = 'flex';
         document.querySelector('#pseudo').value = '';
         document.querySelector('#password').value = ''
     }
