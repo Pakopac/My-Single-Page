@@ -1,6 +1,12 @@
 window.onload = function () {
-    //sessionStorage.setItem('pseudo', 'pako');
-    //sessionStorage.setItem('password', '123');
+    if (sessionStorage.length === 0) {
+        sessionStorage.setItem('pseudo', '');
+        sessionStorage.setItem('password', '');
+    }
+    if (sessionStorage.getItem('pseudo') === '' || sessionStorage.getItem('password') === ''){
+        sessionStorage.setItem('pseudo','pako');
+        sessionStorage.setItem('password','123')
+    }
 
     var menu = document.querySelector('#menu');
     var login = document.querySelector('#login');
@@ -37,29 +43,29 @@ window.onload = function () {
         login.style.display = 'none';
     };
 
+    document.querySelector("#userPseudo").onclick = function () {
     var requestProfile = new XMLHttpRequest();
     requestProfile.open('GET', 'templates/profile.html', true);
 
-    document.querySelector("#userPseudo").onclick = function () {
+    requestProfile.onload = function () {
+        if (this.status >= 200 && this.status < 400) {
+            var respProfile = this.response;
+            profile.innerHTML = respProfile;
 
-        requestProfile.onload = function () {
-            if (this.status >= 200 && this.status < 400) {
-                var respProfile = this.response;
-                profile.innerHTML = respProfile;
+            var userPseudoProfile = document.querySelector('#userPseudoProfile');
+            userPseudoProfile.value = sessionStorage.getItem("pseudo");
+            profile.style.display = 'block';
 
-                var userPseudoProfile = document.querySelector('#userPseudoProfile');
-                userPseudoProfile.value = sessionStorage.getItem("pseudo");
-                menu.style.display = 'none';
-
-                var formProfile = document.querySelector('#formProfile');
-                formProfile.onsubmit = function () {
-                    sessionStorage.setItem('pseudo', userPseudoProfile.value);
-                    menu.style.display = 'block';
-                    profile.style.display = 'none';
-                }
+            var formProfile = document.querySelector('#formProfile');
+            formProfile.onsubmit = function () {
+                sessionStorage.setItem('pseudo', userPseudoProfile.value);
+                profile.style.display = 'none';
+                document.querySelector("#userPseudo").innerHTML = userPseudoProfile.value;
+                return false
             }
-        };
-        requestProfile.send();
 
+        }
+    };
+        requestProfile.send();
     };
 };
