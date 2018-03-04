@@ -47,14 +47,14 @@ window.onload = function () {
         divHome.style.display = 'flex';
     };
 
-    buttonProfile.onclick = function () {
-        var requestProfile = new XMLHttpRequest();
-        requestProfile.open('GET', 'templates/profile.html', true);
+    var requestProfile = new XMLHttpRequest();
+    requestProfile.open('GET', 'templates/profile.html', true);
+    requestProfile.onload = function () {
+        if (this.status >= 200 && this.status < 400) {
+            var respProfile = this.response;
+            profile.innerHTML = respProfile;
 
-        requestProfile.onload = function () {
-            if (this.status >= 200 && this.status < 400) {
-                var respProfile = this.response;
-                profile.innerHTML = respProfile;
+            buttonProfile.onclick = function () {
 
                 var userPseudoProfile = document.querySelector('#userPseudoProfile');
                 userPseudoProfile.value = sessionStorage.getItem("pseudo");
@@ -68,12 +68,11 @@ window.onload = function () {
                     divHome.style.display = 'flex';
                     buttonProfile.innerHTML = userPseudoProfile.value;
                     return false
-                }
-
-            }
-        };
-        requestProfile.send();
+                };
+            };
+        }
     };
+    requestProfile.send();
     logOut.onclick = function(){
         menu.style.display = 'none';
         profile.style.display = 'none';
