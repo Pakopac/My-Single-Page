@@ -28,11 +28,16 @@ window.onload = function () {
             document.forms['loginForm'].onsubmit = function () {
                 var pseudo = document.querySelector('#pseudo').value;
                 var password = document.querySelector('#password').value;
+                var error = document.querySelector('#error');
                 if (pseudo === sessionStorage.getItem("pseudo") && password === sessionStorage.getItem("password")) {
                     buttonProfile.innerHTML = pseudo;
                     menu.style.display = 'flex';
                     login.style.display = 'none';
                     divHome.style.display = 'flex';
+                    error.innerHTML = ''
+                }
+                else {
+                    error.innerHTML = 'Invalid pseudo or password'
                 }
                 return false
             }

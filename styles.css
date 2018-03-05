@@ -97,3 +97,10 @@ body{
 #btnChangeName:hover{
     background: white;
 }
+#error{
+    font-size: 2vw;
+    text-align: center;
+    margin-top: 3vh;
+    color: red;
+    font-weight: bold;
+}
